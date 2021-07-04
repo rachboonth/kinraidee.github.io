@@ -1,1 +1,35 @@
-"Hello World" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethers Playground</title>
+</head>
+<body>
+    Ethers Playground
+    
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+    
+    <script src="./defi-sdk/abis/abi-erc20.js"></script>
+    <script src="./defi-sdk/abis/abi-factory.js"></script>
+    <script src="./defi-sdk/abis/abi-pairs.js"></script>
+    <script src="./defi-sdk/abis/abi-router.js"></script>
+
+    <script src="./defi-sdk/contracts/bsc.js"></script>
+    <script src="./defi-sdk/defi-sdk.js"></script>
+    
+    <script>
+        let DeFi;
+        async function main(){
+            
+            DeFi.provider.on('block', async n => { // listen to new block event
+            let price = await DeFi.Twindex.DOP_BUSD.price();
+            console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
+            });
+        }
+        main();
+
+    </script>
+</body>
+</html>
