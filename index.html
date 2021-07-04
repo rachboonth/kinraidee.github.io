@@ -20,37 +20,40 @@
     <script src="./defi-sdk/defi-sdk.js"></script>
     
     <script>
-        // let DeFi;
-        // async function main(){
+        let DeFi;
+        DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/');
+        async function main(){
             
-        //     // Read-only
-        //     DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/');
+            // Read-only
+            DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/');
             
-        //     // with private key, is able to sign transactions 
-        //     //DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/', "PrivateKey or Mnemonic");
+            // with private key, is able to sign transactions 
+            //DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/', "PrivateKey or Mnemonic");
             
-        //     await DeFi.loadContracts();
-        //     console.log('Ready...');
+            await DeFi.loadContracts();
+            console.log('Ready...');
 
-        //     // try
-        //     // await DeFi.Twindex.DOP_DOLLY.price();
-        //     // or
-        //     // await DeFi.Twindex.swap(amount = 1, from = 'TWIN', to = 'DOP'); // requires private key or mnemonic
-        // }
-        // main();
+            // try
+            // await DeFi.Twindex.DOP_DOLLY.price();
+            // or
+            // await DeFi.Twindex.swap(amount = 1, from = 'TWIN', to = 'DOP'); // requires private key or mnemonic
+        
+            
+            DeFi.provider.on('block', async n => { // listen to new block event
+            let price = await DeFi.Twindex.DOP_BUSD.price();
+                    
+            console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
+            });
 
-        (function () {
-    var old = console.log;
-    var logger = document.getElementById('log');
-    console.log = function (message) {
-        if (typeof message == 'object') {
-            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-        } else {
-            logger.innerHTML += message + '<br />';
+
         }
-    }
-})();
+        main();
+        
+        
 
     </script>
+
+
+<div id="output"></div>
 </body>
 </html>
