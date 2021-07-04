@@ -23,10 +23,19 @@
         let DeFi;
         async function main(){
             
-            DeFi.provider.on('block', async n => { // listen to new block event
-            let price = await DeFi.Twindex.DOP_BUSD.price();
-            console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
-            });
+            // Read-only
+            DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/');
+            
+            // with private key, is able to sign transactions 
+            //DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/', "PrivateKey or Mnemonic");
+            
+            await DeFi.loadContracts();
+            console.log('Ready...');
+
+            // try
+            // await DeFi.Twindex.DOP_DOLLY.price();
+            // or
+            // await DeFi.Twindex.swap(amount = 1, from = 'TWIN', to = 'DOP'); // requires private key or mnemonic
         }
         main();
 
