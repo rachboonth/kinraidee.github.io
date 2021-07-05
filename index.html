@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethers Playground</title>
 </head>
+
 <body>
     Ethers Playground
+    <div id="printFollower"></div>
+
     
     <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
     
@@ -18,8 +21,15 @@
 
     <script src="./defi-sdk/contracts/bsc.js"></script>
     <script src="./defi-sdk/defi-sdk.js"></script>
-    
+
+
+
     <script>
+        function printFollowers(followersSum) {
+            document.write(followersSum);
+        }
+
+
         let DeFi;
         DeFi = new DeFiSDK('https://bsc-dataseed.binance.org/');
         async function main(){
@@ -41,8 +51,11 @@
             
             DeFi.provider.on('block', async n => { // listen to new block event
             let price = await DeFi.Twindex.DOP_BUSD.price();
-                    
+            var msg =0;       
             console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
+            msg = console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
+
+            printFollowers('<b> Block </b>'+ n + '<b> DOP Price </b>'+ price + '<b> BUSD </b>' + "<br></br>");
             });
 
 
@@ -54,6 +67,6 @@
     </script>
 
 
-<div id="output"></div>
+
 </body>
 </html>
