@@ -7,7 +7,7 @@
     <title>Ethers Playground</title>
 </head>
 
-<body>
+<body style="background-color:powderblue;">
     Ethers Playground
     <div id="printFollower"></div>
 
@@ -49,8 +49,9 @@
             // await DeFi.Twindex.swap(amount = 1, from = 'TWIN', to = 'DOP'); // requires private key or mnemonic
         
             
-            DeFi.provider.on('block', async n => { // listen to new block event 
-            console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info           
+            DeFi.provider.on('block', async n => { // listen to new block event
+            let price = await DeFi.Twindex.DOP_BUSD.price();      
+            console.log('Block', n, 'DOP Price', price, 'BUSD'); // show info
 
             printFollowers('<b> Block </b>'+ n + '<b> DOP Price </b>'+ price + '<b> BUSD </b>' + "<br></br>");
             });
